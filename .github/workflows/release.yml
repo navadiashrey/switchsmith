@@ -1,0 +1,29 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*.*.*"
+
+jobs:
+  build-and-release:
+    runs-on: macos-14
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Build .app bundle
+        run: ./make_app.sh
+
+      - name: Zip app
+        run: |
+          VERSION="${GITHUB_REF_NAME#v}"
+          ditto -c -k --sequesterRsrc --keepParent Switchsmith.app "Switchsmith-${VERSION}.zip"
+          echo "ZIP_NAME=Switchsmith-${VERSION}.zip" >> "$GITHUB_ENV"
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create "${{ github.ref_name }}" "${{ env.ZIP_NAME }}" \
+            --title "${{ github.ref_name }}" \
+            --generate-notes
