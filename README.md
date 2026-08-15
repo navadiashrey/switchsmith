@@ -31,6 +31,7 @@ of floating point numbers, not audio assets.
 - **Typing-velocity-reactive dynamics** — clicks get a little punchier as you type faster, and settle back down as you slow down
 - **Distinct key-down / key-up character**, like a real switch's press and release
 - **Menu bar only** — no dock icon, no window unless you open the designer
+- **[Raycast extension](raycast-extension)** — toggle the app or switch presets from Raycast without touching the mouse
 
 ## How it works
 
@@ -71,6 +72,15 @@ one settles it back to baseline.
 **UI.** AppKit `NSStatusItem` for the menu bar chrome, SwiftUI for the
 Switch Designer window, bridged with `NSHostingController`. State lives in
 a single `ObservableObject` that both surfaces bind to directly.
+
+**External control.** Switchsmith registers a `switchsmith://` URL scheme
+(handled via a classic `kAEGetURLEvent` Apple Event, the same mechanism
+browsers use to hand off custom-scheme links to apps) supporting
+`switchsmith://toggle`, `switchsmith://enable`, `switchsmith://disable`,
+and `switchsmith://preset/<id>`. That's the entire IPC surface — no
+persistent socket or server — and it's what the [Raycast
+extension](raycast-extension) (TypeScript, `@raycast/api`) drives to let
+you toggle sound or switch presets without leaving the keyboard.
 
 ## Requirements
 
@@ -120,6 +130,18 @@ Switchsmith lives in the menu bar (keyboard icon). Click it to enable/disable,
 pick a preset, or open the **Switch Designer** to sculpt your own sound.
 Your settings persist across launches.
 
+### Raycast extension (optional)
+
+```sh
+cd raycast-extension
+npm install
+npm run dev   # opens it in Raycast for local development
+```
+
+Adds two commands: **Toggle Switchsmith** and **Set Switch Preset**, both
+driving the app via the `switchsmith://` URL scheme described above. See
+[raycast-extension/](raycast-extension) for the source.
+
 ## Project structure
 
 ```
@@ -133,6 +155,11 @@ Sources/Switchsmith/
 ├── StatusBarController.swift        # NSStatusItem menu bar UI
 ├── DesignerView.swift                # SwiftUI Switch Designer window
 └── DebugLog.swift                     # Lightweight file logger
+
+raycast-extension/                # TypeScript Raycast extension (optional)
+├── src/toggle.tsx                 # No-view command: toggle enabled state
+├── src/set-preset.tsx              # List view: pick a built-in preset
+└── src/presets.ts                   # Mirrors SwitchModel.swift's presets
 ```
 
 ## License
