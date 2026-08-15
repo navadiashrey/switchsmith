@@ -1,9 +1,19 @@
 # Switchsmith
 
-A native macOS menu bar utility that gives your keyboard mechanical switch
-sound — except there are no sound files. Every click is synthesized live,
-in real time, from a small physically-inspired model, and you can shape the
-model yourself instead of picking from a preset library.
+**Smith your own keyboard sound.**
+
+[![Release](https://img.shields.io/github/v/release/navadiashrey/switchsmith?label=release&color=white&labelColor=000000)](https://github.com/navadiashrey/switchsmith/releases/latest)
+[![License: MIT](https://img.shields.io/badge/license-MIT-white?labelColor=000000)](LICENSE)
+[![Platform: macOS 13.5+](https://img.shields.io/badge/platform-macOS%2013.5%2B-white?labelColor=000000)](#requirements)
+
+Switchsmith is a free, open-source **macOS menu bar app that makes your
+keyboard sound mechanical** — every click is **synthesized live, in real
+time**, not played back from a recorded sample pack. Think of it as an
+open-source alternative to [Klack](https://tryklack.com) and
+[Thock](https://github.com/kamillobinski/thock) for anyone who wants
+custom mechanical-keyboard typing sounds on Mac, without downloading or
+recording audio files — shape the click yourself with a small
+physically-inspired DSP model instead of picking from a preset library.
 
 ## Why synthesis instead of samples
 
