@@ -62,6 +62,29 @@ final class AppState: ObservableObject {
         parameters = preset.parameters
     }
 
+    /// Handles `switchsmith://` control URLs, e.g. from the Raycast extension:
+    /// `switchsmith://toggle`, `switchsmith://enable`, `switchsmith://disable`,
+    /// `switchsmith://preset/<id>`.
+    func handleControlURL(_ url: URL) {
+        guard url.scheme == "switchsmith" else { return }
+        switch url.host {
+        case "toggle":
+            isEnabled.toggle()
+        case "enable":
+            isEnabled = true
+        case "disable":
+            isEnabled = false
+        case "preset":
+            let id = url.pathComponents.last(where: { $0 != "/" })
+            if let id, let preset = SwitchPresets.all.first(where: { $0.id == id }) {
+                applyPreset(preset)
+                previewClick()
+            }
+        default:
+            DebugLog.write("Unrecognized control URL: \(url.absoluteString)")
+        }
+    }
+
     /// Fires a single click through the current parameters — used by the
     /// Switch Designer's live preview so you can hear a slider change
     /// immediately without needing to type.

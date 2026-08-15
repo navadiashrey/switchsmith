@@ -39,6 +39,17 @@ cat > "$APP/Contents/Info.plist" <<PLIST
     <string>13.5</string>
     <key>NSHighResolutionCapable</key>
     <true/>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLName</key>
+            <string>com.local.switchsmith.control</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>switchsmith</string>
+            </array>
+        </dict>
+    </array>
 </dict>
 </plist>
 PLIST
