@@ -13,9 +13,9 @@ open-source alternative to [Klack](https://tryklack.com) and
 [Thock](https://github.com/kamillobinski/thock) for anyone who wants
 custom mechanical-keyboard typing sounds on Mac, without downloading or
 recording audio files — shape the click yourself with a small
-physically-inspired DSP model instead of picking from a preset library.
+physically-inspired DSP model.
 
-## Why synthesis instead of samples
+## Why real-time synthesis
 
 Existing tools in this space ([Klack](https://tryklack.com),
 [Thock](https://github.com/kamillobinski/thock)) work by triggering
