@@ -1,0 +1,44 @@
+{
+  "$schema": "https://www.raycast.com/schemas/extension.json",
+  "name": "switchsmith",
+  "title": "Switchsmith",
+  "description": "Control Switchsmith's synthesized keyboard click sounds without leaving your keyboard.",
+  "icon": "icon.png",
+  "author": "navadiashrey",
+  "categories": [
+    "Fun",
+    "Productivity"
+  ],
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "toggle",
+      "title": "Toggle Switchsmith",
+      "description": "Enables or disables synthesized keyboard sounds",
+      "mode": "no-view"
+    },
+    {
+      "name": "set-preset",
+      "title": "Set Switch Preset",
+      "description": "Pick a built-in switch preset",
+      "mode": "view"
+    }
+  ],
+  "dependencies": {
+    "@raycast/api": "^1.80.0",
+    "@raycast/utils": "^1.17.0"
+  },
+  "devDependencies": {
+    "@raycast/eslint-config": "^1.0.11",
+    "@types/node": "20.8.10",
+    "@types/react": "^19.0.10",
+    "eslint": "^8.57.0",
+    "typescript": "^5.4.5"
+  },
+  "scripts": {
+    "build": "ray build",
+    "dev": "ray develop",
+    "lint": "ray lint",
+    "typecheck": "tsc --noEmit"
+  }
+}
